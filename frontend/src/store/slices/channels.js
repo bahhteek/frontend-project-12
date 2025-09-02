@@ -1,30 +1,56 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import api from "../../api"
 
-export const fetchChannels = createAsyncThunk("channels/fetch", async () => {
-  const { data } = await api.get("/api/v1/channels");
-  return data;
+export const fetchChannels = createAsyncThunk(
+  "channels/fetch",
+  async () => (await api.get("/api/v1/channels")).data
+);
+export const addChannel = createAsyncThunk(
+  "channels/add",
+  async (name) => (await api.post("/api/v1/channels", { name })).data
+);
+export const renameChannel = createAsyncThunk(
+  "channels/rename",
+  async ({ id, name }) =>
+    (await api.patch(`/api/v1/channels/${id}`, { name })).data
+);
+export const removeChannel = createAsyncThunk("channels/remove", async (id) => {
+  await api.delete(`/api/v1/channels/${id}`);
+  return { id };
 });
 
-const channelsSlice = createSlice({
+const initial = { list: [], status: "idle", error: null };
+
+const slice = createSlice({
   name: "channels",
-  initialState: { list: [], status: "idle", error: null },
+  initialState: initial,
   reducers: {},
-  extraReducers: (builder) => {
-    builder
+  extraReducers: (b) => {
+    b.addCase(fetchChannels.fulfilled, (st, { payload }) => {
+      st.status = "succeeded";
+      st.list = payload;
+      st.error = null;
+    })
       .addCase(fetchChannels.pending, (st) => {
         st.status = "loading";
         st.error = null;
       })
-      .addCase(fetchChannels.fulfilled, (st, { payload }) => {
-        st.status = "succeeded";
-        st.list = payload;
-      })
       .addCase(fetchChannels.rejected, (st, { error }) => {
         st.status = "failed";
         st.error = error.message;
+      })
+
+      .addCase(addChannel.fulfilled, (st, { payload }) => {
+        st.list.push(payload);
+      })
+      .addCase(renameChannel.fulfilled, (st, { payload }) => {
+        const i = st.list.findIndex((c) => String(c.id) === String(payload.id));
+        if (i > -1) st.list[i] = payload;
+      })
+      .addCase(removeChannel.fulfilled, (st, { payload }) => {
+        st.list = st.list.filter((c) => String(c.id) !== String(payload.id));
       });
   },
 });
 
-export default channelsSlice.reducer;
+export default slice.reducer;

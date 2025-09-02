@@ -12,13 +12,7 @@ export const bindSocketEvents = (socket, dispatch) => {
     dispatch(messageArrived(payload));
   });
 
-  socket.on("newChannel", () => {
-    dispatch(fetchChannels());
-  });
-  socket.on("removeChannel", () => {
-    dispatch(fetchChannels());
-  });
-  socket.on("renameChannel", () => {
-    dispatch(fetchChannels());
-  });
+  socket.on("newChannel", () => dispatch(fetchChannels()));
+  socket.on("removeChannel", () => dispatch(fetchChannels()));
+  socket.on("renameChannel", () => dispatch(fetchChannels()));
 };

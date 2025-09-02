@@ -2,6 +2,10 @@ import { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import api from '../api'
 import { getAuth } from '../auth'
+import ChannelsSidebar from '../components/ChannelsSidebar'
+import AddChannelModal from '../components/modals/AddChannelModal'
+import RemoveChannelModal from '../components/modals/RemoveChannelModal'
+import RenameChannelModal from '../components/modals/RenameChannelModal'
 import { createSocket } from '../socket'
 import { bindSocketEvents } from '../socketBindings'
 import { fetchChannels } from '../store/slices/channels'
@@ -15,6 +19,7 @@ export default function Home() {
   const activeChannelId = useSelector(s => s.ui.activeChannelId);
   const [draft, setDraft] = useState('');
   const auth = getAuth();
+  const modal = useSelector(s => s.ui.modal);
 
   useEffect(() => {
     dispatch(fetchChannels()).then((res) => {
@@ -59,27 +64,7 @@ export default function Home() {
 
   return (
     <div style={{ display:'grid', gridTemplateColumns:'260px 1fr', height:'calc(100vh - 100px)', gap:16 }}>
-      <aside style={{ borderRight:'1px solid #eee', paddingRight:12 }}>
-        <h3 style={{ marginTop:0 }}>Каналы</h3>
-        {chStatus === 'loading' && <div>Загрузка...</div>}
-        <ul style={{ listStyle:'none', padding:0, margin:0 }}>
-          {channels.map((c) => (
-            <li key={c.id}>
-              <button
-                onClick={() => dispatch(setActiveChannel(c.id))}
-                style={{
-                  width:'100%', textAlign:'left', padding:'8px 10px', marginBottom:6,
-                  borderRadius:6, border:'1px solid #ddd',
-                  background: String(c.id) === String(activeChannelId) ? '#f4f6ff' : '#fff'
-                }}
-              >
-                #{c.name}
-              </button>
-            </li>
-          ))}
-        </ul>
-      </aside>
-
+      <ChannelsSidebar />
       <section style={{ display:'flex', flexDirection:'column' }}>
         <header style={{ borderBottom:'1px solid #eee', paddingBottom:8, marginBottom:8 }}>
           <b>Канал:</b> {channels.find(c => String(c.id) === String(activeChannelId))?.name ?? '—'}
@@ -110,6 +95,9 @@ export default function Home() {
         </form>
         {sendError && <div style={{ color:'#f33', marginTop:6 }}>{sendError}</div>}
       </section>
+      <AddChannelModal    show={modal?.type === 'add'} />
+      <RenameChannelModal show={modal?.type === 'rename'} channel={modal?.payload} />
+      <RemoveChannelModal show={modal?.type === 'remove'} channel={modal?.payload} />
     </div>
   );
 }
