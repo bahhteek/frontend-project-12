@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { toast } from "react-toastify"
 import api from "../../api"
 import i18n from "../../i18n"
+import filter from "../../profanity"
 
 export const fetchChannels = createAsyncThunk(
   "channels/fetch",
@@ -10,13 +11,15 @@ export const fetchChannels = createAsyncThunk(
 
 export const addChannel = createAsyncThunk(
   "channels/add",
-  async (name) => (await api.post("/api/v1/channels", { name })).data
+  async (name) =>
+    (await api.post("/api/v1/channels", { name: filter.clean(name) })).data
 );
 
 export const renameChannel = createAsyncThunk(
   "channels/rename",
   async ({ id, name }) =>
-    (await api.patch(`/api/v1/channels/${id}`, { name })).data
+    (await api.patch(`/api/v1/channels/${id}`, { name: filter.clean(name) }))
+      .data
 );
 
 export const removeChannel = createAsyncThunk(

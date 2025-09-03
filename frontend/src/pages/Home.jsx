@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
-import api from '../api'
 import { getAuth } from '../auth'
 import ChannelsSidebar from '../components/ChannelsSidebar'
 import AddChannelModal from '../components/modals/AddChannelModal'
@@ -10,7 +9,7 @@ import RenameChannelModal from '../components/modals/RenameChannelModal'
 import { createSocket } from '../socket'
 import { bindSocketEvents } from '../socketBindings'
 import { fetchChannels } from '../store/slices/channels'
-import { fetchMessages, setSendError, setSending } from '../store/slices/messages'
+import { fetchMessages, sendMessage } from '../store/slices/messages'
 import { setActiveChannel } from '../store/slices/ui'
 
 export default function Home() {
@@ -44,25 +43,21 @@ export default function Home() {
     [messages, activeChannelId]
   );
 
-  const onSubmit = async (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
     const text = draft.trim();
     if (!text || sending || !activeChannelId) return;
 
-    dispatch(setSending(true));
-    try {
-      await api.post('/api/v1/messages', {
-        body: text,
-        channelId: String(activeChannelId),
-        username: auth?.username || 'user',
-      });
-      setDraft('');
-    } catch (err) {
-      console.log(err);
-      dispatch(setSendError(t("home.networkError")));
-    } finally {
-      dispatch(setSending(false));
-    }
+    dispatch(
+      sendMessage({
+        text,
+        channelId: activeChannelId,
+        username: auth?.username || "user",
+      })
+    )
+      .unwrap()
+      .then(() => setDraft("")) // очищаем только если успех
+      .catch(() => {}); // ошибки уже в slice
   };
 
   return (

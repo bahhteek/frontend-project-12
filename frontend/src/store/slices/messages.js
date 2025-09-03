@@ -1,10 +1,28 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import api from "../../api"
+import filter from "../../profanity"
 
 export const fetchMessages = createAsyncThunk("messages/fetch", async () => {
   const { data } = await api.get("/api/v1/messages");
   return data;
 });
+
+export const sendMessage = createAsyncThunk(
+  "messages/send",
+  async ({ text, channelId, username }, { rejectWithValue }) => {
+    try {
+      const { data } = await api.post("/api/v1/messages", {
+        body: filter.clean(text),
+        channelId: String(channelId),
+        username,
+      });
+      return data;
+    } catch (err) {
+      console.log(err);
+      return rejectWithValue("Ошибка отправки");
+    }
+  }
+);
 
 const messagesSlice = createSlice({
   name: "messages",
@@ -18,10 +36,6 @@ const messagesSlice = createSlice({
   reducers: {
     messageArrived: (st, { payload }) => {
       st.list.push(payload);
-    },
-    setSending: (st, { payload }) => {
-      st.sending = payload;
-      if (payload) st.sendError = null;
     },
     setSendError: (st, { payload }) => {
       st.sendError = payload || "Ошибка отправки";
@@ -40,10 +54,21 @@ const messagesSlice = createSlice({
       .addCase(fetchMessages.rejected, (st, { error }) => {
         st.status = "failed";
         st.error = error.message;
+      })
+
+      .addCase(sendMessage.pending, (st) => {
+        st.sending = true;
+        st.sendError = null;
+      })
+      .addCase(sendMessage.fulfilled, (st) => {
+        st.sending = false;
+      })
+      .addCase(sendMessage.rejected, (st, { payload }) => {
+        st.sending = false;
+        st.sendError = payload;
       });
   },
 });
 
-export const { messageArrived, setSending, setSendError } =
-  messagesSlice.actions;
+export const { messageArrived, setSendError } = messagesSlice.actions;
 export default messagesSlice.reducer;
