@@ -3,7 +3,8 @@ const KEY = "hexlet-chat:auth";
 export const getAuth = () => {
   try {
     return JSON.parse(localStorage.getItem(KEY)) || null;
-  } catch {
+  } catch (error){
+    console.log(error);
     return null;
   }
 };

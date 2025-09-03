@@ -17,8 +17,8 @@ export const sendMessage = createAsyncThunk(
         username,
       });
       return data;
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
       return rejectWithValue("Ошибка отправки");
     }
   }

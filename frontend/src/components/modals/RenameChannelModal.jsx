@@ -39,7 +39,8 @@ export default function RenameChannelModal({ show, channel }) {
               renameChannel({ id: channel.id, name: name.trim() })
             ).unwrap();
             dispatch(closeModal());
-          } catch {
+          } catch (error){
+            console.log(error);
             setStatus(t("renameChannelModal.error"));
           } finally {
             setSubmitting(false);

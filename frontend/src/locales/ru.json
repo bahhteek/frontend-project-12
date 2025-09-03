@@ -1,6 +1,6 @@
 {
   "nav": {
-    "home": "Главная",
+    "home": "Hexlet Chat",
     "login": "Войти",
     "signup": "Регистрация",
     "logout": "Выйти"

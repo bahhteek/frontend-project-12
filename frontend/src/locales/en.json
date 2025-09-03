@@ -1,6 +1,6 @@
 {
   "nav": {
-    "home": "Home",
+    "home": "Hexlet Chat",
     "login": "Login",
     "signup": "Sign up",
     "logout": "Logout"

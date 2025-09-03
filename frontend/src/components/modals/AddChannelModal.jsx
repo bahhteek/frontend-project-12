@@ -37,7 +37,8 @@ export default function AddChannelModal({ show }) {
           try {
             await dispatch(addChannel(name.trim())).unwrap();
             dispatch(closeModal());
-          } catch {
+          } catch (error){
+            console.log(error);
             setStatus(t("addChannelModal.creatingError"));
           } finally {
             setSubmitting(false);

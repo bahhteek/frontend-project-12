@@ -24,8 +24,8 @@ export default function Login() {
             const { data } = await api.post('/api/v1/login', values);
             dispatch(login({ token: data.token, username: data.username }));
             navigate(from, { replace: true });
-          } catch (e) {
-            console.log(e);
+          } catch (error) {
+            console.log(error);
             setStatus(t("login.invalid"));
           } finally {
             setSubmitting(false);

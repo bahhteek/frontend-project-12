@@ -5,7 +5,8 @@ const KEY = "hexlet-chat:auth";
 const initialAuth = (() => {
   try {
     return JSON.parse(localStorage.getItem(KEY)) || null;
-  } catch {
+  } catch (error){
+    console.log(error);
     return null;
   }
 })();

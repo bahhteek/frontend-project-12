@@ -56,8 +56,8 @@ export default function Home() {
       })
     )
       .unwrap()
-      .then(() => setDraft("")) // очищаем только если успех
-      .catch(() => {}); // ошибки уже в slice
+      .then(() => setDraft(""))
+      .catch(() => {}); 
   };
 
   return (

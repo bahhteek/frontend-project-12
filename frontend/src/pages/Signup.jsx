@@ -30,8 +30,9 @@ export default function Signup() {
         });
         dispatch(login(res.data));
         navigate("/");
-      } catch (err) {
-        if (err.response?.status === 409) {
+      } catch (error) {
+        console.log(error);
+        if (error.response?.status === 409) {
           setErrors({ username: t("signup.userExists") });
         } else {
           setErrors({ username: t("signup.generic") });

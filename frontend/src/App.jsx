@@ -16,7 +16,7 @@ export default function App() {
   return (
     <div style={{ padding: 16 }}>
       <nav style={{ display: "flex", gap: 12, marginBottom: 16 }}>
-        <Link to="/">{t("nav.login")}</Link>
+        <Link to="/">{t("nav.home")}</Link>
         {!user ? (
           <>
             <Link to="/login">{t("nav.login")}</Link>
