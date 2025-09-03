@@ -20,6 +20,8 @@
   },
   "homepage": "https://github.com/bahhteek/frontend-project-12#readme",
   "dependencies": {
-    "@hexlet/chat-server": "^2.0.4"
+    "@hexlet/chat-server": "^2.0.4",
+    "i18next": "^25.4.2",
+    "react-i18next": "^15.7.3"
   }
 }

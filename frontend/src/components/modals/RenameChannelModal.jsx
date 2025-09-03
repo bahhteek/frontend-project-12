@@ -1,6 +1,7 @@
 import { Form as F, Field, Formik } from 'formik'
 import { useEffect, useRef } from 'react'
 import { Button, Form, Modal } from 'react-bootstrap'
+import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import * as Yup from 'yup'
 import { renameChannel } from '../../store/slices/channels'
@@ -14,37 +15,68 @@ export default function RenameChannelModal({ show, channel }) {
 
   const otherNames = new Set(channels.filter(c => c.id !== channel?.id).map(c => c.name.trim().toLowerCase()));
   const Schema = Yup.object({
-    name: Yup.string().trim().min(3).max(20).notOneOf([...otherNames], 'Имя занято').required(),
+    name: Yup.string()
+      .trim()
+      .min(3)
+      .max(20)
+      .notOneOf([...otherNames], t("renameChannelModal.nameIsBusy"))
+      .required(),
   });
+  const {t} = useTranslation();
 
   return (
     <Modal show={show} onHide={() => dispatch(closeModal())}>
-      <Modal.Header closeButton><Modal.Title>Переименовать канал</Modal.Title></Modal.Header>
+      <Modal.Header closeButton>
+        <Modal.Title>{t("renameChannelModal.renemaChannel")}</Modal.Title>
+      </Modal.Header>
       <Formik
         enableReinitialize
-        initialValues={{ name: channel?.name ?? '' }}
+        initialValues={{ name: channel?.name ?? "" }}
         validationSchema={Schema}
         onSubmit={async ({ name }, { setSubmitting, setStatus }) => {
           try {
-            await dispatch(renameChannel({ id: channel.id, name: name.trim() })).unwrap();
+            await dispatch(
+              renameChannel({ id: channel.id, name: name.trim() })
+            ).unwrap();
             dispatch(closeModal());
-          } catch { setStatus('Ошибка'); } finally { setSubmitting(false); }
+          } catch {
+            setStatus(t("renameChannelModal.error"));
+          } finally {
+            setSubmitting(false);
+          }
         }}
       >
         {({ errors, touched, isSubmitting, status }) => (
           <F>
             <Modal.Body>
               <Form.Group>
-                <Form.Label htmlFor="name">Имя</Form.Label>
-                <Field innerRef={inputRef} id="name" name="name"
-                       className={`form-control ${touched.name && errors.name ? 'is-invalid' : ''}`} />
-                {touched.name && errors.name && <div className="invalid-feedback">{errors.name}</div>}
+                <Form.Label htmlFor="name">
+                  {t("renameChannelModal.name")}
+                </Form.Label>
+                <Field
+                  innerRef={inputRef}
+                  id="name"
+                  name="name"
+                  className={`form-control ${
+                    touched.name && errors.name ? "is-invalid" : ""
+                  }`}
+                />
+                {touched.name && errors.name && (
+                  <div className="invalid-feedback">{errors.name}</div>
+                )}
                 {status && <div className="text-danger mt-2">{status}</div>}
               </Form.Group>
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="secondary" onClick={() => dispatch(closeModal())}>Отмена</Button>
-              <Button type="submit" disabled={isSubmitting}>Сохранить</Button>
+              <Button
+                variant="secondary"
+                onClick={() => dispatch(closeModal())}
+              >
+                {t("renameChannelModal.cancel")}
+              </Button>
+              <Button type="submit" disabled={isSubmitting}>
+                {t("renameChannelModal.save")}
+              </Button>
             </Modal.Footer>
           </F>
         )}

@@ -1,0 +1,87 @@
+{
+  "nav": {
+    "home": "Главная",
+    "login": "Войти",
+    "signup": "Регистрация",
+    "logout": "Выйти"
+  },
+  "signup": {
+    "title": "Регистрация",
+    "username": "Имя пользователя",
+    "password": "Пароль",
+    "confirmPassword": "Подтверждение пароля",
+    "submit": "Зарегистрироваться",
+    "enter": "Войти",
+    "alreadyHave": "Уже есть аккаунт?",
+    "errors": {
+      "required": "Обязательное поле",
+      "shortPassword": "Не менее 6 символов",
+      "passwordsMustMatch": "Пароли должны совпадать",
+      "userExists": "Такой пользователь уже существует",
+      "generic": "Ошибка регистрации, попробуйте снова"
+    }
+  },
+  "login": {
+    "title": "Вход",
+    "username": "Имя пользователя",
+    "password": "Пароль",
+    "submit": "Войти",
+    "testCreds": "Тестовые данные: admin / admin",
+    "invalid": "Неверные имя пользователя или пароль",
+    "enterUsername": "Укажите имя пользователя",
+    "enterPassword": "Укажите пароль"
+  },
+  "modal": {
+    "removeChannel": {
+      "title": "Удалить канал",
+      "body": "Точно удалить канал <1>#{{name}}</1>? Его сообщения будут удалены.",
+      "cancel": "Отмена",
+      "confirm": "Удалить"
+    }
+  },
+  "home": {
+    "channel": "Канал",
+    "messages": "сообщений",
+    "messagesLoading": "Загрузка сообщений…",
+    "messageAs": "Сообщение как",
+    "sending": "Отправка...",
+    "send": "Отправить",
+    "networkError": "Не удалось отправить сообщение. Проверьте сеть."
+  },
+  "sidebar": {
+    "channels": "Каналы",
+    "add": "Добавить",
+    "rename": "Переименовать",
+    "delete": "Удалить"
+  },
+  "addChannelModal": {
+    "fromThreeSym": "От 3 символов",
+    "toTwentySym": "До 20 символов",
+    "nameIsBusy": "Имя занято",
+    "requiredField": "Обязательное поле",
+    "newChannel": "Новый канал",
+    "creatingError": "Ошибка создания",
+    "name": "Имя",
+    "cancel": "Отмена",
+    "create": "Создать"
+  },
+  "removeChannelModal": {
+    "deleteChannel": "Удалить канал",
+    "agreeDelete": "Точно удалить канал",
+    "messagesWillBeDeleted": "Его сообщения будут удалены.",
+    "cancel": "Отмена",
+    "delete": "Удалить"
+  },
+  "renameChannelModal": {
+    "renemaChannel": "Переименовать канал",
+    "error": "Ошибка",
+    "nameIsBusy": "Имя занято",
+    "name": "Имя",
+    "cancel": "Отмена",
+    "save": "Сохранить"
+  },
+  "notFound": {
+    "pageNotFound": "404 — Страница не найдена",
+    "onMainPage": "На главную"
+  }
+}

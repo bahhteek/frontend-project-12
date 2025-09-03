@@ -1,0 +1,87 @@
+{
+  "nav": {
+    "home": "Home",
+    "login": "Login",
+    "signup": "Sign up",
+    "logout": "Logout"
+  },
+  "signup": {
+    "title": "Sign up",
+    "username": "Username",
+    "password": "Password",
+    "confirmPassword": "Confirm password",
+    "submit": "Register",
+    "enter": "Login",
+    "alreadyHave": "Already have an account?",
+    "errors": {
+      "required": "Required field",
+      "shortPassword": "At least 6 characters",
+      "passwordsMustMatch": "Passwords must match",
+      "userExists": "This user already exists",
+      "generic": "Registration error, please try again"
+    }
+  },
+  "login": {
+    "title": "Login",
+    "username": "Username",
+    "password": "Password",
+    "submit": "Login",
+    "testCreds": "Test credentials: admin / admin",
+    "invalid": "Invalid username or password",
+    "enterUsername": "Enter username",
+    "enterPassword": "Enter password"
+  },
+  "modal": {
+    "removeChannel": {
+      "title": "Remove channel",
+      "body": "Are you sure you want to remove channel <1>#{{name}}</1>? Its messages will also be deleted.",
+      "cancel": "Cancel",
+      "confirm": "Remove"
+    }
+  },
+  "home": {
+    "channel": "Channel",
+    "messages": "messages",
+    "messagesLoading": "Loading messages…",
+    "messageAs": "Message as",
+    "sending": "Sending...",
+    "send": "Send",
+    "networkError": "Failed to send message. Check your network."
+  },
+  "sidebar": {
+    "channels": "Channels",
+    "add": "Add",
+    "rename": "Rename",
+    "delete": "Delete"
+  },
+  "addChannelModal": {
+    "fromThreeSym": "From 3 characters",
+    "toTwentySym": "Up to 20 characters",
+    "nameIsBusy": "Name is already taken",
+    "requiredField": "Required field",
+    "newChannel": "New channel",
+    "creatingError": "Creation error",
+    "name": "Name",
+    "cancel": "Cancel",
+    "create": "Create"
+  },
+  "removeChannelModal": {
+    "deleteChannel": "Delete channel",
+    "agreeDelete": "Are you sure you want to delete the channel",
+    "messagesWillBeDeleted": "Its messages will be deleted.",
+    "cancel": "Cancel",
+    "delete": "Delete"
+  },
+  "renameChannelModal": {
+    "renemaChannel": "Rename channel",
+    "error": "Error",
+    "nameIsBusy": "Name is already taken",
+    "name": "Name",
+    "cancel": "Cancel",
+    "save": "Save"
+  },
+  "notFound": {
+    "pageNotFound": "404 — Page not found",
+    "onMainPage": "Go to main page"
+  }
+}

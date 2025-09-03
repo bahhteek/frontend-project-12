@@ -1,4 +1,5 @@
 import { useFormik } from "formik"
+import { useTranslation } from "react-i18next"
 import { useDispatch } from "react-redux"
 import { Link, useNavigate } from "react-router-dom"
 import * as Yup from "yup"
@@ -16,6 +17,7 @@ const SignupSchema = Yup.object().shape({
 export default function Signup() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const {t} = useTranslation();
 
   const formik = useFormik({
     initialValues: { username: "", password: "", confirmPassword: "" },
@@ -30,9 +32,9 @@ export default function Signup() {
         navigate("/");
       } catch (err) {
         if (err.response?.status === 409) {
-          setErrors({ username: "Такой пользователь уже существует" });
+          setErrors({ username: t("signup.userExists") });
         } else {
-          setErrors({ username: "Ошибка регистрации, попробуйте снова" });
+          setErrors({ username: t("signup.generic") });
         }
       } finally {
         setSubmitting(false);
@@ -42,12 +44,12 @@ export default function Signup() {
 
   return (
     <div style={{ maxWidth: 400, margin: "50px auto" }}>
-      <h2>Регистрация</h2>
+      <h2>{t("signup.title")}</h2>
       <form onSubmit={formik.handleSubmit}>
         <div style={{ marginBottom: 12 }}>
           <input
             name="username"
-            placeholder="Имя пользователя"
+            placeholder={t("signup.username")}
             value={formik.values.username}
             onChange={formik.handleChange}
           />
@@ -59,7 +61,7 @@ export default function Signup() {
           <input
             type="password"
             name="password"
-            placeholder="Пароль"
+            placeholder={t("signup.password")}
             value={formik.values.password}
             onChange={formik.handleChange}
           />
@@ -71,7 +73,7 @@ export default function Signup() {
           <input
             type="password"
             name="confirmPassword"
-            placeholder="Подтверждение пароля"
+            placeholder={t("signup.confirmPassword")}
             value={formik.values.confirmPassword}
             onChange={formik.handleChange}
           />
@@ -80,11 +82,11 @@ export default function Signup() {
           )}
         </div>
         <button type="submit" disabled={formik.isSubmitting}>
-          Зарегистрироваться
+          {t("signup.submit")}
         </button>
       </form>
       <p style={{ marginTop: 12 }}>
-        Уже есть аккаунт? <Link to="/login">Войти</Link>
+        {t("signup.alreadyHave")} <Link to="/login">{t("signup.enter")}</Link>
       </p>
     </div>
   );

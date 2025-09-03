@@ -1,4 +1,5 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik'
+import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import api from '../api'
@@ -9,10 +10,11 @@ export default function Login() {
   const location = useLocation();
   const dispatch = useDispatch();
   const from = location.state?.from?.pathname || '/';
+  const {t} = useTranslation();
 
   return (
     <div style={{ maxWidth: 360 }}>
-      <h1>Вход</h1>
+      <h1>{t("login.title")}</h1>
 
       <Formik
         initialValues={{ username: '', password: '' }}
@@ -24,23 +26,23 @@ export default function Login() {
             navigate(from, { replace: true });
           } catch (e) {
             console.log(e);
-            setStatus('Неверные имя пользователя или пароль');
+            setStatus(t("login.invalid"));
           } finally {
             setSubmitting(false);
           }
         }}
         validate={(v) => {
           const errors = {};
-          if (!v.username) errors.username = 'Укажите имя пользователя';
-          if (!v.password) errors.password = 'Укажите пароль';
+          if (!v.username) errors.username = t("login.enterUsername");
+          if (!v.password) errors.password = t("login.enterPassword");
           return errors;
         }}
       >
         {({ isSubmitting, touched, errors, status }) => (
           <Form>
             <div style={{ marginBottom: 12 }}>
-              <label htmlFor="username">Имя пользователя</label>
-              <Field id="username" name="username" type="text" placeholder="admin"
+              <label htmlFor="username">{t('login.username')}</label>
+              <Field id="username" name="username" type="text" placeholder={t("login.username")}
                 style={{ display:'block', width:'100%', padding:8, marginTop:4,
                   border:`1px solid ${touched.username && errors.username ? '#f33' : '#ccc'}`, borderRadius:6 }}/>
               <div style={{ color:'#f33', fontSize:12, marginTop:4 }}>
@@ -49,8 +51,8 @@ export default function Login() {
             </div>
 
             <div style={{ marginBottom: 8 }}>
-              <label htmlFor="password">Пароль</label>
-              <Field id="password" name="password" type="password" placeholder="admin"
+              <label htmlFor="password">{t("login.password")}</label>
+              <Field id="password" name="password" type="password" placeholder={t("login.password")}
                 style={{ display:'block', width:'100%', padding:8, marginTop:4,
                   border:`1px solid ${touched.password && errors.password ? '#f33' : '#ccc'}`, borderRadius:6 }}/>
               <div style={{ color:'#f33', fontSize:12, marginTop:4 }}>
@@ -61,10 +63,10 @@ export default function Login() {
             {status && <div style={{ color:'#f33', marginBottom:8 }}>{status}</div>}
 
             <button type="submit" disabled={isSubmitting} style={{ padding:'8px 12px' }}>
-              Войти
+              {t('login.submit')}
             </button>
             <div style={{ fontSize:12, opacity:0.7, marginTop:8 }}>
-              Тестовые данные: admin / admin
+              {t('login.testCreds')}
             </div>
           </Form>
         )}

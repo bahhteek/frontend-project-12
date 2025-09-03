@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import api from '../api'
 import { getAuth } from '../auth'
@@ -20,6 +21,7 @@ export default function Home() {
   const [draft, setDraft] = useState('');
   const auth = getAuth();
   const modal = useSelector(s => s.ui.modal);
+  const {t} = useTranslation();
 
   useEffect(() => {
     dispatch(fetchChannels()).then((res) => {
@@ -57,48 +59,85 @@ export default function Home() {
       setDraft('');
     } catch (err) {
       console.log(err);
-      dispatch(setSendError('Не удалось отправить сообщение. Проверьте сеть.'));
+      dispatch(setSendError(t("home.networkError")));
     } finally {
       dispatch(setSending(false));
     }
   };
 
   return (
-    <div style={{ display:'grid', gridTemplateColumns:'260px 1fr', height:'calc(100vh - 100px)', gap:16 }}>
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: "260px 1fr",
+        height: "calc(100vh - 100px)",
+        gap: 16,
+      }}
+    >
       <ChannelsSidebar />
-      <section style={{ display:'flex', flexDirection:'column' }}>
-        <header style={{ borderBottom:'1px solid #eee', paddingBottom:8, marginBottom:8 }}>
-          <b>Канал:</b> {channels.find(c => String(c.id) === String(activeChannelId))?.name ?? '—'}
-          <span style={{ marginLeft:10, opacity:.6, fontSize:12 }}>
-            {msgStatus === 'loading' ? 'Загрузка сообщений…' : `${channelMessages.length} сообщений`}
+      <section style={{ display: "flex", flexDirection: "column" }}>
+        <header
+          style={{
+            borderBottom: "1px solid #eee",
+            paddingBottom: 8,
+            marginBottom: 8,
+          }}
+        >
+          <b>{t("home.channel")}:</b>{" "}
+          {channels.find((c) => String(c.id) === String(activeChannelId))
+            ?.name ?? "—"}
+          <span style={{ marginLeft: 10, opacity: 0.6, fontSize: 12 }}>
+            {msgStatus === "loading"
+              ? t("home.messagesLoading")
+              : `${channelMessages.length} ${t("home.messages")}`}
           </span>
         </header>
 
-        <div style={{ flex:1, overflow:'auto', paddingRight:10 }}>
+        <div style={{ flex: 1, overflow: "auto", paddingRight: 10 }}>
           {channelMessages.map((m) => (
-            <div key={m.id} style={{ marginBottom:8 }}>
+            <div key={m.id} style={{ marginBottom: 8 }}>
               <b>{m.username}</b>: {m.body}
             </div>
           ))}
         </div>
 
-        <form onSubmit={onSubmit} style={{ display:'flex', gap:8, marginTop:8 }}>
+        <form
+          onSubmit={onSubmit}
+          style={{ display: "flex", gap: 8, marginTop: 8 }}
+        >
           <input
-            placeholder={`Сообщение как ${auth?.username ?? 'user'}`}
+            placeholder={`${t("home.messageAs")} ${auth?.username ?? "user"}`}
             value={draft}
             onChange={(e) => setDraft(e.target.value)}
             disabled={sending}
-            style={{ flex:1, padding:'10px 12px', border:'1px solid #ddd', borderRadius:6 }}
+            style={{
+              flex: 1,
+              padding: "10px 12px",
+              border: "1px solid #ddd",
+              borderRadius: 6,
+            }}
           />
-          <button type="submit" disabled={!draft.trim() || sending} style={{ padding:'10px 14px' }}>
-            {sending ? 'Отправка…' : 'Отправить'}
+          <button
+            type="submit"
+            disabled={!draft.trim() || sending}
+            style={{ padding: "10px 14px" }}
+          >
+            {sending ? t("home.sending") : t("home.send")}
           </button>
         </form>
-        {sendError && <div style={{ color:'#f33', marginTop:6 }}>{sendError}</div>}
+        {sendError && (
+          <div style={{ color: "#f33", marginTop: 6 }}>{sendError}</div>
+        )}
       </section>
-      <AddChannelModal    show={modal?.type === 'add'} />
-      <RenameChannelModal show={modal?.type === 'rename'} channel={modal?.payload} />
-      <RemoveChannelModal show={modal?.type === 'remove'} channel={modal?.payload} />
+      <AddChannelModal show={modal?.type === "add"} />
+      <RenameChannelModal
+        show={modal?.type === "rename"}
+        channel={modal?.payload}
+      />
+      <RemoveChannelModal
+        show={modal?.type === "remove"}
+        channel={modal?.payload}
+      />
     </div>
   );
 }
