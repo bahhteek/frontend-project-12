@@ -15,26 +15,27 @@ export default function App() {
 
   return (
     <div style={{ padding: 16 }}>
-      <nav style={{ display: 'flex', gap: 12, marginBottom: 16 }}>
-        <Link to="/">{t('nav.login')}</Link>
+      <nav style={{ display: "flex", gap: 12, marginBottom: 16 }}>
+        <Link to="/">{t("nav.login")}</Link>
         {!user ? (
           <>
-            <Link to="/login">{t('nav.login')}</Link>
-            <Link to="/signup">{t('nav.signup')}</Link>
+            <Link to="/login">{t("nav.login")}</Link>
+            <Link to="/signup">{t("nav.signup")}</Link>
           </>
         ) : (
-          <button onClick={() => dispatch(logout())}>
-            {t('nav.logout')}
-          </button>
+          <button onClick={() => dispatch(logout())}>{t("nav.logout")}</button>
         )}
       </nav>
 
       <Routes>
-        <Route path="/" element={
-          <RequireAuth>
-            <Home />
-          </RequireAuth>
-        }/>
+        <Route
+          path="/"
+          element={
+            <RequireAuth>
+              <Home />
+            </RequireAuth>
+          }
+        />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="*" element={<NotFound />} />

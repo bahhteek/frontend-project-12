@@ -83,5 +83,14 @@
   "notFound": {
     "pageNotFound": "404 — Страница не найдена",
     "onMainPage": "На главную"
+  },
+  "toasts": {
+    "networkError": "Ошибка сети",
+    "channelCreated": "Канал создан",
+    "channelRenamed": "Канал переименован",
+    "channelRemoved": "Канал удалён",
+    "channelCreateError": "Не удалось создать канал",
+    "channelRenameError": "Не удалось переименовать канал",
+    "channelRemoveError": "Не удалось удалить канал"
   }
 }

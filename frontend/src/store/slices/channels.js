@@ -1,19 +1,24 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+import { toast } from "react-toastify"
 import api from "../../api"
+import i18n from "../../i18n"
 
 export const fetchChannels = createAsyncThunk(
   "channels/fetch",
   async () => (await api.get("/api/v1/channels")).data
 );
+
 export const addChannel = createAsyncThunk(
   "channels/add",
   async (name) => (await api.post("/api/v1/channels", { name })).data
 );
+
 export const renameChannel = createAsyncThunk(
   "channels/rename",
   async ({ id, name }) =>
     (await api.patch(`/api/v1/channels/${id}`, { name })).data
 );
+
 export const removeChannel = createAsyncThunk(
   "channels/remove",
   async (id, { getState }) => {
@@ -47,17 +52,35 @@ const slice = createSlice({
       .addCase(fetchChannels.rejected, (st, { error }) => {
         st.status = "failed";
         st.error = error.message;
+        toast.error(i18n.t("toasts.networkError"));
       })
 
       .addCase(addChannel.fulfilled, (st, { payload }) => {
         st.list.push(payload);
+        toast.success(i18n.t("toasts.channelCreated"));
       })
+      .addCase(addChannel.rejected, (st, { error }) => {
+        st.error = error.message;
+        toast.error(i18n.t("toasts.channelCreateError"));
+      })
+
       .addCase(renameChannel.fulfilled, (st, { payload }) => {
         const i = st.list.findIndex((c) => String(c.id) === String(payload.id));
         if (i > -1) st.list[i] = payload;
+        toast.success(i18n.t("toasts.channelRenamed"));
       })
+      .addCase(renameChannel.rejected, (st, { error }) => {
+        st.error = error.message;
+        toast.error(i18n.t("toasts.channelRenameError"));
+      })
+
       .addCase(removeChannel.fulfilled, (st, { payload }) => {
         st.list = st.list.filter((c) => String(c.id) !== String(payload.id));
+        toast.success(i18n.t("toasts.channelRemoved"));
+      })
+      .addCase(removeChannel.rejected, (st, { error }) => {
+        st.error = error.message;
+        toast.error(i18n.t("toasts.channelRemoveError"));
       });
   },
 });

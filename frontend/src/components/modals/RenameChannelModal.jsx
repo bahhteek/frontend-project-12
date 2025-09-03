@@ -9,6 +9,7 @@ import { closeModal } from '../../store/slices/ui'
 
 export default function RenameChannelModal({ show, channel }) {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const channels = useSelector(s => s.channels.list);
   const inputRef = useRef(null);
   useEffect(() => { if (show) setTimeout(() => { inputRef.current?.select(); }, 0); }, [show]);
@@ -22,7 +23,6 @@ export default function RenameChannelModal({ show, channel }) {
       .notOneOf([...otherNames], t("renameChannelModal.nameIsBusy"))
       .required(),
   });
-  const {t} = useTranslation();
 
   return (
     <Modal show={show} onHide={() => dispatch(closeModal())}>

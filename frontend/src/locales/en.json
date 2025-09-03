@@ -83,5 +83,14 @@
   "notFound": {
     "pageNotFound": "404 — Page not found",
     "onMainPage": "Go to main page"
+  },
+  "toasts": {
+    "networkError": "Network error",
+    "channelCreated": "Channel created",
+    "channelRenamed": "Channel renamed",
+    "channelRemoved": "Channel removed",
+    "channelCreateError": "Failed to create channel",
+    "channelRenameError": "Failed to rename channel",
+    "channelRemoveError": "Failed to remove channel"
   }
 }
