@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css"
 import App from "./App.jsx"
 import "./i18n.js"
 import i18n from "./i18n.js"
+import { withRollbar } from "./rollbar.jsx"
 import { store } from "./store"
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -16,8 +17,12 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <I18nextProvider i18n={i18n}>
       <Provider store={store}>
         <BrowserRouter>
-          <App />
-          <ToastContainer position="top-right" autoClose={3000} />
+          {withRollbar(
+            <>
+              <App />
+              <ToastContainer position="top-right" autoClose={3000} />
+            </>
+          )}
         </BrowserRouter>
       </Provider>
     </I18nextProvider>

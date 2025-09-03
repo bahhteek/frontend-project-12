@@ -123,6 +123,13 @@ export default function Home() {
         {sendError && (
           <div style={{ color: "#f33", marginTop: 6 }}>{sendError}</div>
         )}
+        <button
+          onClick={() => {
+            throw new Error("Test Rollbar error");
+          }}
+        >
+          Throw Error
+        </button>
       </section>
       <AddChannelModal show={modal?.type === "add"} />
       <RenameChannelModal
