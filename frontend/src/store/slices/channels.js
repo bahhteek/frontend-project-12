@@ -14,10 +14,19 @@ export const renameChannel = createAsyncThunk(
   async ({ id, name }) =>
     (await api.patch(`/api/v1/channels/${id}`, { name })).data
 );
-export const removeChannel = createAsyncThunk("channels/remove", async (id) => {
-  await api.delete(`/api/v1/channels/${id}`);
-  return { id };
-});
+export const removeChannel = createAsyncThunk(
+  "channels/remove",
+  async (id, { getState }) => {
+    await api.delete(`/api/v1/channels/${id}`);
+    const state = getState();
+    const channels = state.channels.list.filter(
+      (c) => String(c.id) !== String(id)
+    );
+    const general =
+      channels.find((c) => c.name?.toLowerCase() === "general") || channels[0];
+    return { id, nextId: general?.id ?? null };
+  }
+);
 
 const initial = { list: [], status: "idle", error: null };
 

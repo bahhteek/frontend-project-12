@@ -25,14 +25,9 @@ const uiSlice = createSlice({
     b.addCase(addChannel.fulfilled, (st, { payload }) => {
       st.activeChannelId = payload.id;
     });
-    b.addCase(removeChannel.fulfilled, (st, { payload }, full) => {
+    b.addCase(removeChannel.fulfilled, (st, { payload }) => {
       if (String(st.activeChannelId) === String(payload.id)) {
-        const state = full.getState();
-        const general =
-          state.channels.list.find(
-            (c) => c.name?.toLowerCase() === "general"
-          ) || state.channels.list[0];
-        st.activeChannelId = general?.id ?? null;
+        st.activeChannelId = payload.nextId;
       }
     });
   },

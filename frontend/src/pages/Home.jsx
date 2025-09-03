@@ -14,7 +14,7 @@ import { setActiveChannel } from '../store/slices/ui'
 
 export default function Home() {
   const dispatch = useDispatch();
-  const { list: channels, status: chStatus } = useSelector(s => s.channels);
+  const { list: channels } = useSelector(s => s.channels);
   const { list: messages, status: msgStatus, sending, sendError } = useSelector(s => s.messages);
   const activeChannelId = useSelector(s => s.ui.activeChannelId);
   const [draft, setDraft] = useState('');
@@ -56,6 +56,7 @@ export default function Home() {
       });
       setDraft('');
     } catch (err) {
+      console.log(err);
       dispatch(setSendError('Не удалось отправить сообщение. Проверьте сеть.'));
     } finally {
       dispatch(setSending(false));

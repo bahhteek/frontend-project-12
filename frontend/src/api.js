@@ -1,5 +1,5 @@
-import axios from "axios";
-import { getAuth } from "./auth";
+import axios from "axios"
+import { getAuth } from "./auth"
 
 const api = axios.create({
   baseURL: "/",

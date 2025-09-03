@@ -1,14 +1,14 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik'
+import { useDispatch } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import api from '../api'
-import { isAuthenticated, setAuth } from '../auth'
+import { login } from '../store/slices/auth'
 
 export default function Login() {
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch();
   const from = location.state?.from?.pathname || '/';
-
-  if (isAuthenticated()) navigate('/');
 
   return (
     <div style={{ maxWidth: 360 }}>
@@ -20,9 +20,10 @@ export default function Login() {
           setStatus(null);
           try {
             const { data } = await api.post('/api/v1/login', values);
-            setAuth({ token: data.token, username: data.username });
+            dispatch(login({ token: data.token, username: data.username }));
             navigate(from, { replace: true });
           } catch (e) {
+            console.log(e);
             setStatus('Неверные имя пользователя или пароль');
           } finally {
             setSubmitting(false);

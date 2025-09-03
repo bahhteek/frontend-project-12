@@ -11,7 +11,9 @@ export default function RemoveChannelModal({ show, channel }) {
     try {
       await dispatch(removeChannel(channel.id)).unwrap();
       dispatch(closeModal());
-    } catch {  }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
