@@ -14,43 +14,35 @@ export default function App() {
   const { t } = useTranslation()
 
   return (
-    <div className='d-flex flex-column h-100'>
-      <nav className='shadow-sm navbar navbar-expand-lg navbar-light bg-white'>
-        <div className='container'>
-          <Link className='navbar-brand' to='/'>
+    <div className="d-flex flex-column h-100">
+      <nav className="shadow-sm navbar navbar-expand-lg navbar-light bg-white">
+        <div className="container">
+          <Link className="navbar-brand" to="/">
             {t('nav.home')}
           </Link>
           {user && (
             <button
-              type='button'
-              className='btn btn-primary'
+              type="button"
+              className="btn btn-primary"
               onClick={() => dispatch(logout())}
             >
               {t('nav.logout')}
             </button>
           )}
         </div>
-        {/* {!user ? (
-          <>
-            <Link to='/login'>{t('nav.login')}</Link>
-            <Link to='/signup'>{t('nav.signup')}</Link>
-          </>
-        ) : (
-          <button onClick={() => dispatch(logout())}>{t('nav.logout')}</button>
-        )} */}
       </nav>
       <Routes>
         <Route
-          path='/'
+          path="/"
           element={
             <RequireAuth>
               <Home />
             </RequireAuth>
           }
         />
-        <Route path='/login' element={<Login />} />
-        <Route path='/signup' element={<Signup />} />
-        <Route path='*' element={<NotFound />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   )
