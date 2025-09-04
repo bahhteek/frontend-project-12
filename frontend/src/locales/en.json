@@ -64,7 +64,7 @@
     "error": "Error",
     "nameIsBusy": "Must be unique",
     "required": "Required field",
-    "name": "Name",
+    "name": "Channel name",
     "cancel": "Cancel",
     "send": "Send"
   },

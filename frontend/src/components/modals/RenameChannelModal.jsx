@@ -59,6 +59,9 @@ export default function RenameChannelModal({ show, channel }) {
                     touched.name && errors.name ? "is-invalid" : ""
                   }`}
                 />
+                <label class="visually-hidden" for="name">
+                  {t("renameChannelModal.name")}
+                </label>
                 {touched.name && errors.name && (
                   <div className="invalid-feedback">{errors.name}</div>
                 )}
