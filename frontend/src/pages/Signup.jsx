@@ -12,13 +12,16 @@ export default function Signup() {
   const { t } = useTranslation();
 
   const SignupSchema = Yup.object().shape({
-    username: Yup.string().min(3).max(20).required(t("signup.errors.required")),
+    username: Yup.string()
+      .trim()
+      .required(t("signup.errors.required"))
+      .min(3, t("signup.errors.shortLogin"))
+      .max(20, t("signup.errors.shortLogin")),
     password: Yup.string()
       .min(6, t("signup.errors.shortPassword"))
       .required(t("signup.errors.required")),
     confirmPassword: Yup.string()
-      .oneOf([Yup.ref("password")], t("signup.errors.passwordsMustMatch"))
-      .required(t("signup.errors.required")),
+      .oneOf([Yup.ref("password")], t("signup.errors.passwordsMustMatch")),
   });
 
   return (
@@ -76,7 +79,9 @@ export default function Signup() {
                         id="username"
                         name="username"
                         type="text"
+                        autoFocus
                         placeholder={t("signup.username")}
+                        required
                         className={`form-control ${
                           touched.username && errors.username
                             ? "is-invalid"
@@ -95,6 +100,7 @@ export default function Signup() {
                         id="password"
                         name="password"
                         type="password"
+                        required
                         placeholder={t("signup.password")}
                         className={`form-control ${
                           touched.password && errors.password

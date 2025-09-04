@@ -13,6 +13,7 @@
     "submit": "Register",
     "errors": {
       "required": "Required field",
+      "shortLogin": "From 3 to 20 characters",
       "shortPassword": "At least 6 characters",
       "passwordsMustMatch": "Passwords must match",
       "userExists": "This user already exists",
