@@ -42,8 +42,7 @@
     "delete": "Удалить"
   },
   "addChannelModal": {
-    "fromThreeSym": "От 3 символов",
-    "toTwentySym": "До 20 символов",
+    "shortName": "От 3 до 20 символов",
     "nameIsBusy": "Имя занято",
     "requiredField": "Обязательное поле",
     "newChannel": "Добавить канал",

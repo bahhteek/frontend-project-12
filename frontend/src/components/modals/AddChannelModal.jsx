@@ -19,8 +19,8 @@ export default function AddChannelModal({ show }) {
   const Schema = Yup.object({
     name: Yup.string()
       .trim()
-      .min(3, t("addChannelModal.fromThreeSym"))
-      .max(20, t("addChannelModal.toTwentySym"))
+      .min(3, t("addChannelModal.shortName"))
+      .max(20, t("addChannelModal.shortName"))
       .notOneOf([...names], t("addChannelModal.nameIsBusy"))
       .required(t("addChannelModal.requiredField")),
   });
