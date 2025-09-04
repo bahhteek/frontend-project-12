@@ -11,8 +11,6 @@
     "password": "Password",
     "confirmPassword": "Confirm password",
     "submit": "Register",
-    "enter": "Login",
-    "alreadyHave": "Already have an account?",
     "errors": {
       "required": "Required field",
       "shortPassword": "At least 6 characters",
@@ -22,67 +20,55 @@
     }
   },
   "login": {
-    "title": "Login",
-    "username": "Username",
+    "username": "Your nickname",
     "password": "Password",
     "submit": "Login",
-    "testCreds": "Test credentials: admin / admin",
     "invalid": "Invalid username or password",
     "enterUsername": "Enter username",
-    "enterPassword": "Enter password"
-  },
-  "modal": {
-    "removeChannel": {
-      "title": "Remove channel",
-      "body": "Are you sure you want to remove channel <1>#{{name}}</1>? Its messages will also be deleted.",
-      "cancel": "Cancel",
-      "confirm": "Remove"
-    }
+    "enterPassword": "Enter password",
+    "noAccaunt": "No account?",
+    "register": "Sign up"
   },
   "home": {
-    "channel": "Channel",
     "messages": "messages",
-    "messagesLoading": "Loading messages…",
-    "messageAs": "Message as",
-    "sending": "Sending...",
-    "send": "Send",
-    "networkError": "Failed to send message. Check your network."
+    "enterMessage": "Enter a message...",
+    "send": "Send"
   },
   "sidebar": {
     "channels": "Channels",
-    "add": "Add",
     "rename": "Rename",
     "delete": "Delete"
   },
   "addChannelModal": {
-    "fromThreeSym": "From 3 characters",
+    "fromThreeSym": "At least 3 characters",
     "toTwentySym": "Up to 20 characters",
     "nameIsBusy": "Name is already taken",
     "requiredField": "Required field",
-    "newChannel": "New channel",
+    "newChannel": "Add channel",
     "creatingError": "Creation error",
     "name": "Name",
     "cancel": "Cancel",
-    "create": "Create"
+    "send": "Send"
   },
   "removeChannelModal": {
     "deleteChannel": "Delete channel",
-    "agreeDelete": "Are you sure you want to delete the channel",
-    "messagesWillBeDeleted": "Its messages will be deleted.",
+    "agreeDelete": "Are you sure?",
     "cancel": "Cancel",
     "delete": "Delete"
   },
   "renameChannelModal": {
     "renemaChannel": "Rename channel",
     "error": "Error",
-    "nameIsBusy": "Name is already taken",
+    "nameIsBusy": "Must be unique",
+    "required": "Required field",
     "name": "Name",
     "cancel": "Cancel",
-    "save": "Save"
+    "send": "Send"
   },
   "notFound": {
-    "pageNotFound": "404 — Page not found",
-    "onMainPage": "Go to main page"
+    "pageNotFound": "Page not found",
+    "onMainPage": "to the main page",
+    "youCan": "But you can go"
   },
   "toasts": {
     "networkError": "Network error",

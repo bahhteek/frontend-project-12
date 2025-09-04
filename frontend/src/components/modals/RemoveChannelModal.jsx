@@ -19,23 +19,26 @@ export default function RemoveChannelModal({ show, channel }) {
   };
 
   return (
-    <Modal show={show} onHide={() => dispatch(closeModal())}>
+    <Modal show={show} onHide={() => dispatch(closeModal())} centered>
       <Modal.Header closeButton>
         <Modal.Title>{t("removeChannelModal.deleteChannel")}</Modal.Title>
       </Modal.Header>
       <form onSubmit={onRemove}>
         <Modal.Body>
-          {t("removeChannelModal.agreeDelete")} <b>#{channel?.name}</b>?{" "}
-          {t("removeChannelModal.messagesWillBeDeleted")}
+          <p className="lead">{t("removeChannelModal.agreeDelete")}</p>
+          <div className="d-flex justify-content-end">
+            <Button
+              variant="secondary"
+              onClick={() => dispatch(closeModal())}
+              className="me-2 btn btn-secondary"
+            >
+              {t("removeChannelModal.cancel")}
+            </Button>
+            <Button type="submit" variant="danger" className="btn btn-danger">
+              {t("removeChannelModal.delete")}
+            </Button>
+          </div>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => dispatch(closeModal())}>
-            {t("removeChannelModal.cancel")}
-          </Button>
-          <Button type="submit" variant="danger">
-            {t("removeChannelModal.delete")}
-          </Button>
-        </Modal.Footer>
       </form>
     </Modal>
   );

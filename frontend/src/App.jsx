@@ -14,19 +14,31 @@ export default function App() {
   const { t } = useTranslation();
 
   return (
-    <div style={{ padding: 16 }}>
-      <nav style={{ display: "flex", gap: 12, marginBottom: 16 }}>
-        <Link to="/">{t("nav.home")}</Link>
-        {!user ? (
+    <div className="d-flex flex-column h-100">
+      <nav className="shadow-sm navbar navbar-expand-lg navbar-light bg-white">
+        <div className="container">
+          <Link className="navbar-brand" to="/">
+            {t("nav.home")}
+          </Link>
+          {user && (
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={() => dispatch(logout())}
+            >
+              {t("nav.logout")}
+            </button>
+          )}
+        </div>
+        {/* {!user ? (
           <>
             <Link to="/login">{t("nav.login")}</Link>
             <Link to="/signup">{t("nav.signup")}</Link>
           </>
         ) : (
           <button onClick={() => dispatch(logout())}>{t("nav.logout")}</button>
-        )}
+        )} */}
       </nav>
-
       <Routes>
         <Route
           path="/"

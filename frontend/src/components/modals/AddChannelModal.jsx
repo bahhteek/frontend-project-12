@@ -26,7 +26,7 @@ export default function AddChannelModal({ show }) {
   });
 
   return (
-    <Modal show={show} onHide={() => dispatch(closeModal())}>
+    <Modal show={show} onHide={() => dispatch(closeModal())} centered>
       <Modal.Header closeButton>
         <Modal.Title>{t("addChannelModal.newChannel")}</Modal.Title>
       </Modal.Header>
@@ -37,7 +37,7 @@ export default function AddChannelModal({ show }) {
           try {
             await dispatch(addChannel(name.trim())).unwrap();
             dispatch(closeModal());
-          } catch (error){
+          } catch (error) {
             console.log(error);
             setStatus(t("addChannelModal.creatingError"));
           } finally {
@@ -49,14 +49,11 @@ export default function AddChannelModal({ show }) {
           <F>
             <Modal.Body>
               <Form.Group>
-                <Form.Label htmlFor="name">
-                  {t("addChannelModal.name")}
-                </Form.Label>
                 <Field
                   innerRef={inputRef}
                   id="name"
                   name="name"
-                  className={`form-control ${
+                  className={`form-control mb-2 ${
                     touched.name && errors.name ? "is-invalid" : ""
                   }`}
                 />
@@ -64,19 +61,24 @@ export default function AddChannelModal({ show }) {
                   <div className="invalid-feedback">{errors.name}</div>
                 )}
                 {status && <div className="text-danger mt-2">{status}</div>}
+                <div className="d-flex justify-content-end">
+                  <Button
+                    variant="secondary"
+                    onClick={() => dispatch(closeModal())}
+                    className="me-2 btn btn-secondary"
+                  >
+                    {t("addChannelModal.cancel")}
+                  </Button>
+                  <Button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="btn btn-primary"
+                  >
+                    {t("addChannelModal.send")}
+                  </Button>
+                </div>
               </Form.Group>
             </Modal.Body>
-            <Modal.Footer>
-              <Button
-                variant="secondary"
-                onClick={() => dispatch(closeModal())}
-              >
-                {t("addChannelModal.cancel")}
-              </Button>
-              <Button type="submit" disabled={isSubmitting}>
-                {t("addChannelModal.create")}
-              </Button>
-            </Modal.Footer>
           </F>
         )}
       </Formik>

@@ -21,11 +21,11 @@ export default function RenameChannelModal({ show, channel }) {
       .min(3)
       .max(20)
       .notOneOf([...otherNames], t("renameChannelModal.nameIsBusy"))
-      .required(),
+      .required(t("renameChannelModal.required")),
   });
 
   return (
-    <Modal show={show} onHide={() => dispatch(closeModal())}>
+    <Modal show={show} onHide={() => dispatch(closeModal())} centered>
       <Modal.Header closeButton>
         <Modal.Title>{t("renameChannelModal.renemaChannel")}</Modal.Title>
       </Modal.Header>
@@ -39,7 +39,7 @@ export default function RenameChannelModal({ show, channel }) {
               renameChannel({ id: channel.id, name: name.trim() })
             ).unwrap();
             dispatch(closeModal());
-          } catch (error){
+          } catch (error) {
             console.log(error);
             setStatus(t("renameChannelModal.error"));
           } finally {
@@ -51,34 +51,36 @@ export default function RenameChannelModal({ show, channel }) {
           <F>
             <Modal.Body>
               <Form.Group>
-                <Form.Label htmlFor="name">
-                  {t("renameChannelModal.name")}
-                </Form.Label>
                 <Field
                   innerRef={inputRef}
                   id="name"
                   name="name"
-                  className={`form-control ${
+                  className={`form-control mb-2 ${
                     touched.name && errors.name ? "is-invalid" : ""
                   }`}
                 />
                 {touched.name && errors.name && (
                   <div className="invalid-feedback">{errors.name}</div>
                 )}
-                {status && <div className="text-danger mt-2">{status}</div>}
+                {status && <div className="invalid-feedback">{status}</div>}
+                <div className="d-flex justify-content-end">
+                  <Button
+                    variant="secondary"
+                    onClick={() => dispatch(closeModal())}
+                    className="me-2 btn btn-secondary"
+                  >
+                    {t("renameChannelModal.cancel")}
+                  </Button>
+                  <Button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="btn btn-primary"
+                  >
+                    {t("renameChannelModal.send")}
+                  </Button>
+                </div>
               </Form.Group>
             </Modal.Body>
-            <Modal.Footer>
-              <Button
-                variant="secondary"
-                onClick={() => dispatch(closeModal())}
-              >
-                {t("renameChannelModal.cancel")}
-              </Button>
-              <Button type="submit" disabled={isSubmitting}>
-                {t("renameChannelModal.save")}
-              </Button>
-            </Modal.Footer>
           </F>
         )}
       </Formik>
