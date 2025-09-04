@@ -5,19 +5,19 @@ export default defineConfig({
   plugins: [react()],
   build: { sourcemap: true },
   resolve: {
-    dedupe: ["react", "react-dom"],
+    dedupe: ['react', 'react-dom'],
   },
   server: {
     port: 5002,
     proxy: {
-      "/api": {
-        target: "http://localhost:5001",
+      '/api': {
+        target: 'http://localhost:5001',
       },
-      "/socket.io": {
-        target: "ws://localhost:5001",
+      '/socket.io': {
+        target: 'ws://localhost:5001',
         ws: true,
         rewriteWsOrigin: true,
       },
     },
   },
-});
+})

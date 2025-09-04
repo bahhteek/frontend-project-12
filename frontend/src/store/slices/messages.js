@@ -3,8 +3,8 @@ import api from "../../api"
 import filter from "../../profanity"
 
 export const fetchMessages = createAsyncThunk("messages/fetch", async () => {
-  const { data } = await api.get("/api/v1/messages");
-  return data;
+  const { data } = await api.get("/api/v1/messages")
+  return data
 });
 
 export const sendMessage = createAsyncThunk(
@@ -15,14 +15,14 @@ export const sendMessage = createAsyncThunk(
         body: filter.clean(text),
         channelId: String(channelId),
         username,
-      });
+      })
       return data;
     } catch (error) {
-      console.log(error);
-      return rejectWithValue("Ошибка отправки");
+      console.log(error)
+      return rejectWithValue("Ошибка отправки")
     }
   }
-);
+)
 
 const messagesSlice = createSlice({
   name: "messages",
@@ -35,40 +35,40 @@ const messagesSlice = createSlice({
   },
   reducers: {
     messageArrived: (st, { payload }) => {
-      st.list.push(payload);
+      st.list.push(payload)
     },
     setSendError: (st, { payload }) => {
-      st.sendError = payload || "Ошибка отправки";
+      st.sendError = payload || "Ошибка отправки"
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchMessages.pending, (st) => {
-        st.status = "loading";
-        st.error = null;
+        st.status = "loading"
+        st.error = null
       })
       .addCase(fetchMessages.fulfilled, (st, { payload }) => {
-        st.status = "succeeded";
-        st.list = payload;
+        st.status = "succeeded"
+        st.list = payload
       })
       .addCase(fetchMessages.rejected, (st, { error }) => {
-        st.status = "failed";
-        st.error = error.message;
+        st.status = "failed"
+        st.error = error.message
       })
 
       .addCase(sendMessage.pending, (st) => {
-        st.sending = true;
-        st.sendError = null;
+        st.sending = true
+        st.sendError = null
       })
       .addCase(sendMessage.fulfilled, (st) => {
-        st.sending = false;
+        st.sending = false
       })
       .addCase(sendMessage.rejected, (st, { payload }) => {
-        st.sending = false;
-        st.sendError = payload;
-      });
+        st.sending = false
+        st.sendError = payload
+      })
   },
-});
+})
 
-export const { messageArrived, setSendError } = messagesSlice.actions;
-export default messagesSlice.reducer;
+export const { messageArrived, setSendError } = messagesSlice.actions
+export default messagesSlice.reducer
