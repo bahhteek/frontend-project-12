@@ -39,7 +39,8 @@
   "sidebar": {
     "channels": "Каналы",
     "rename": "Переименовать",
-    "delete": "Удалить"
+    "delete": "Удалить",
+    "channelManagement": "Управление каналом"
   },
   "addChannelModal": {
     "shortName": "От 3 до 20 символов",
@@ -58,6 +59,7 @@
     "delete": "Удалить"
   },
   "renameChannelModal": {
+    "shortName": "От 3 до 20 символов",
     "renemaChannel": "Переименовать канал",
     "error": "Ошибка",
     "nameIsBusy": "Должно быть уникальным",

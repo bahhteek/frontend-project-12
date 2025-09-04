@@ -18,8 +18,8 @@ export default function RenameChannelModal({ show, channel }) {
   const Schema = Yup.object({
     name: Yup.string()
       .trim()
-      .min(3)
-      .max(20)
+      .min(3, t("renameChannelModal.shortName"))
+      .max(20, t("renameChannelModal.shortName"))
       .notOneOf([...otherNames], t("renameChannelModal.nameIsBusy"))
       .required(t("renameChannelModal.required")),
   });

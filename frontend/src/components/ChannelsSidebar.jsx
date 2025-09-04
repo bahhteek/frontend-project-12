@@ -75,10 +75,11 @@ export default function ChannelsSidebar() {
                   split
                   className="flex-grow-0"
                   variant={isActive ? "secondary" : "light"}
-                  aria-label={
-                    t("sidebar.channelActions") || "Управление каналом"
-                  }
-                />
+                >
+                  <span className="visually-hidden">
+                    {t("sidebar.channelManagement")}
+                  </span>
+                </Dropdown.Toggle>
 
                 <Dropdown.Menu>
                   <Dropdown.Item

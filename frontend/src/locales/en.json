@@ -39,11 +39,11 @@
   "sidebar": {
     "channels": "Channels",
     "rename": "Rename",
-    "delete": "Delete"
+    "delete": "Delete",
+    "channelManagement": "Channel Management"
   },
   "addChannelModal": {
-    "fromThreeSym": "At least 3 characters",
-    "toTwentySym": "Up to 20 characters",
+    "shortName": "From 3 to 20 characters",
     "nameIsBusy": "Name is already taken",
     "requiredField": "Required field",
     "newChannel": "Add channel",
@@ -59,6 +59,7 @@
     "delete": "Delete"
   },
   "renameChannelModal": {
+    "shortName": "From 3 to 20 characters",
     "renemaChannel": "Rename channel",
     "error": "Error",
     "nameIsBusy": "Must be unique",
