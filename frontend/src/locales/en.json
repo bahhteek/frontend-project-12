@@ -33,7 +33,8 @@
   "home": {
     "messages": "messages",
     "enterMessage": "Enter a message...",
-    "send": "Send"
+    "send": "Send",
+    "newMessage": "New message"
   },
   "sidebar": {
     "channels": "Channels",

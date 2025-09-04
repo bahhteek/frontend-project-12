@@ -100,6 +100,7 @@ export default function Home() {
                     onChange={(e) => setDraft(e.target.value)}
                     disabled={sending}
                     className="border-0 p-0 ps-2 form-control"
+                    aria-label={t("home.newMessage")}
                   />
                   <button
                     type="submit"

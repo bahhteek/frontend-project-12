@@ -33,7 +33,8 @@
   "home": {
     "messages": "сообщений",
     "enterMessage": "Введите сообщение...",
-    "send": "Отправить"
+    "send": "Отправить",
+    "newMessage": "Новое сообщение"
   },
   "sidebar": {
     "channels": "Каналы",
