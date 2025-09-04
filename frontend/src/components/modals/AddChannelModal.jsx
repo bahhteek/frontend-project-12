@@ -57,6 +57,9 @@ export default function AddChannelModal({ show }) {
                     touched.name && errors.name ? "is-invalid" : ""
                   }`}
                 />
+                <label class="visually-hidden" for="name">
+                  {t("addChannelModal.name")}
+                </label>
                 {touched.name && errors.name && (
                   <div className="invalid-feedback">{errors.name}</div>
                 )}
