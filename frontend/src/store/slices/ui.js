@@ -18,7 +18,7 @@ const uiSlice = createSlice({
   extraReducers: (b) => {
     b.addCase(fetchChannels.fulfilled, (st, { payload }) => {
       if (!st.activeChannelId && payload.length) {
-        const g = payload.find((c) => c.name?.toLowerCase() === 'general')
+        const g = payload.find(c => c.name?.toLowerCase() === 'general')
         st.activeChannelId = g ? g.id : payload[0].id
       }
     })

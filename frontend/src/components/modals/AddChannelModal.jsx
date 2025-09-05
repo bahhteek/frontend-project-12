@@ -11,9 +11,15 @@ export default function AddChannelModal({ show }) {
   const dispatch = useDispatch()
   const channels = useSelector(s => s.channels.list)
   const inputRef = useRef(null)
-  const {t} = useTranslation()
+  const { t } = useTranslation()
 
-  useEffect(() => { if (show) { setTimeout(() => { inputRef.current?.focus(); }, 0); } }, [show])
+  useEffect(() => { 
+    if (show) { 
+      setTimeout(() => { 
+        inputRef.current?.focus()
+      }, 0)
+    } 
+  }, [show])
 
   const names = new Set(channels.map(c => c.name.trim().toLowerCase()))
   const Schema = Yup.object({
@@ -28,20 +34,22 @@ export default function AddChannelModal({ show }) {
   return (
     <Modal show={show} onHide={() => dispatch(closeModal())} centered>
       <Modal.Header closeButton>
-        <Modal.Title>{t('addChannelModal.newChannel')}</Modal.Title>
+        <Modal.Title>{t("addChannelModal.newChannel")}</Modal.Title>
       </Modal.Header>
       <Formik
-        initialValues={{ name: '' }}
+        initialValues={{ name: "" }}
         validationSchema={Schema}
         onSubmit={async ({ name }, { setSubmitting, setStatus }) => {
           try {
-            await dispatch(addChannel(name.trim())).unwrap()
-            dispatch(closeModal())
-          } catch (error) {
-            console.log(error)
-            setStatus(t('addChannelModal.creatingError'))
-          } finally {
-            setSubmitting(false)
+            await dispatch(addChannel(name.trim())).unwrap();
+            dispatch(closeModal());
+          } 
+          catch (error) {
+            console.log(error);
+            setStatus(t("addChannelModal.creatingError"));
+          } 
+          finally {
+            setSubmitting(false);
           }
         }}
       >
@@ -51,33 +59,33 @@ export default function AddChannelModal({ show }) {
               <Form.Group>
                 <Field
                   innerRef={inputRef}
-                  id='name'
-                  name='name'
+                  id="name"
+                  name="name"
                   className={`form-control mb-2 ${
-                    touched.name && errors.name ? 'is-invalid' : ''
+                    touched.name && errors.name ? "is-invalid" : ""
                   }`}
                 />
-                <label class='visually-hidden' for='name'>
-                  {t('addChannelModal.name')}
+                <label className="visually-hidden" htmlFor="name">
+                  {t("addChannelModal.name")}
                 </label>
                 {touched.name && errors.name && (
-                  <div className='invalid-feedback'>{errors.name}</div>
+                  <div className="invalid-feedback">{errors.name}</div>
                 )}
-                {status && <div className='text-danger mt-2'>{status}</div>}
-                <div className='d-flex justify-content-end'>
+                {status && <div className="text-danger mt-2">{status}</div>}
+                <div className="d-flex justify-content-end">
                   <Button
-                    variant='secondary'
+                    variant="secondary"
                     onClick={() => dispatch(closeModal())}
-                    className='me-2 btn btn-secondary'
+                    className="me-2 btn btn-secondary"
                   >
-                    {t('addChannelModal.cancel')}
+                    {t("addChannelModal.cancel")}
                   </Button>
                   <Button
-                    type='submit'
+                    type="submit"
                     disabled={isSubmitting}
-                    className='btn btn-primary'
+                    className="btn btn-primary"
                   >
-                    {t('addChannelModal.send')}
+                    {t("addChannelModal.send")}
                   </Button>
                 </div>
               </Form.Group>
@@ -86,5 +94,5 @@ export default function AddChannelModal({ show }) {
         )}
       </Formik>
     </Modal>
-  )
+  );
 }

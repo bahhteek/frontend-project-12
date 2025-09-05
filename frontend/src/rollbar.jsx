@@ -6,7 +6,7 @@ const rollbarConfig = {
   captureUncaught: true,
   captureUnhandledRejections: true,
   ignoredMessages: [/ResizeObserver loop limit exceeded/i],
-};
+}
 
 export function withRollbar(children) {
   return (

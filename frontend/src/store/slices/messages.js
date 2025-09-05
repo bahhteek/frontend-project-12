@@ -1,34 +1,34 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import api from "../../api"
-import filter from "../../profanity"
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import api from '../../api'
+import filter from '../../profanity'
 
-export const fetchMessages = createAsyncThunk("messages/fetch", async () => {
-  const { data } = await api.get("/api/v1/messages")
+export const fetchMessages = createAsyncThunk('messages/fetch', async () => {
+  const { data } = await api.get('/api/v1/messages')
   return data
-});
+})
 
 export const sendMessage = createAsyncThunk(
-  "messages/send",
+  'messages/send',
   async ({ text, channelId, username }, { rejectWithValue }) => {
     try {
-      const { data } = await api.post("/api/v1/messages", {
+      const { data } = await api.post('/api/v1/messages', {
         body: filter.clean(text),
         channelId: String(channelId),
         username,
       })
-      return data;
+      return data
     } catch (error) {
       console.log(error)
-      return rejectWithValue("Ошибка отправки")
+      return rejectWithValue('Ошибка отправки')
     }
   }
 )
 
 const messagesSlice = createSlice({
-  name: "messages",
+  name: 'messages',
   initialState: {
     list: [],
-    status: "idle",
+    status: 'idle',
     error: null,
     sending: false,
     sendError: null,
@@ -38,21 +38,21 @@ const messagesSlice = createSlice({
       st.list.push(payload)
     },
     setSendError: (st, { payload }) => {
-      st.sendError = payload || "Ошибка отправки"
+      st.sendError = payload || 'Ошибка отправки'
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchMessages.pending, (st) => {
-        st.status = "loading"
+        st.status = 'loading'
         st.error = null
       })
       .addCase(fetchMessages.fulfilled, (st, { payload }) => {
-        st.status = "succeeded"
+        st.status = 'succeeded'
         st.list = payload
       })
       .addCase(fetchMessages.rejected, (st, { error }) => {
-        st.status = "failed"
+        st.status = 'failed'
         st.error = error.message
       })
 

@@ -12,7 +12,7 @@ import i18n from './i18n.js'
 import { withRollbar } from './rollbar.jsx'
 import { store } from './store'
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <I18nextProvider i18n={i18n}>
       <Provider store={store}>
@@ -20,11 +20,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           {withRollbar(
             <>
               <App />
-              <ToastContainer position='top-right' autoClose={3000} />
+              <ToastContainer position="top-right" autoClose={3000} />
             </>
           )}
         </BrowserRouter>
       </Provider>
     </I18nextProvider>
   </React.StrictMode>
-)
+);
