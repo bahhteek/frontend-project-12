@@ -13,12 +13,12 @@ export default function AddChannelModal({ show }) {
   const inputRef = useRef(null)
   const { t } = useTranslation()
 
-  useEffect(() => { 
-    if (show) { 
-      setTimeout(() => { 
+  useEffect(() => {
+    if (show) {
+      setTimeout(() => {
         inputRef.current?.focus()
       }, 0)
-    } 
+    }
   }, [show])
 
   const names = new Set(channels.map(c => c.name.trim().toLowerCase()))
@@ -34,22 +34,22 @@ export default function AddChannelModal({ show }) {
   return (
     <Modal show={show} onHide={() => dispatch(closeModal())} centered>
       <Modal.Header closeButton>
-        <Modal.Title>{t("addChannelModal.newChannel")}</Modal.Title>
+        <Modal.Title>{t('addChannelModal.newChannel')}</Modal.Title>
       </Modal.Header>
       <Formik
-        initialValues={{ name: "" }}
+        initialValues={{ name: '' }}
         validationSchema={Schema}
         onSubmit={async ({ name }, { setSubmitting, setStatus }) => {
           try {
-            await dispatch(addChannel(name.trim())).unwrap();
-            dispatch(closeModal());
-          } 
+            await dispatch(addChannel(name.trim())).unwrap()
+            dispatch(closeModal())
+          }
           catch (error) {
-            console.log(error);
-            setStatus(t("addChannelModal.creatingError"));
-          } 
+            console.log(error)
+            setStatus(t("addChannelModal.creatingError"))
+          }
           finally {
-            setSubmitting(false);
+            setSubmitting(false)
           }
         }}
       >
@@ -62,11 +62,11 @@ export default function AddChannelModal({ show }) {
                   id="name"
                   name="name"
                   className={`form-control mb-2 ${
-                    touched.name && errors.name ? "is-invalid" : ""
+                    touched.name && errors.name ? 'is-invalid' : ''
                   }`}
                 />
                 <label className="visually-hidden" htmlFor="name">
-                  {t("addChannelModal.name")}
+                  {t('addChannelModal.name')}
                 </label>
                 {touched.name && errors.name && (
                   <div className="invalid-feedback">{errors.name}</div>
@@ -78,14 +78,14 @@ export default function AddChannelModal({ show }) {
                     onClick={() => dispatch(closeModal())}
                     className="me-2 btn btn-secondary"
                   >
-                    {t("addChannelModal.cancel")}
+                    {t('addChannelModal.cancel')}
                   </Button>
                   <Button
                     type="submit"
                     disabled={isSubmitting}
                     className="btn btn-primary"
                   >
-                    {t("addChannelModal.send")}
+                    {t('addChannelModal.send')}
                   </Button>
                 </div>
               </Form.Group>
@@ -94,5 +94,5 @@ export default function AddChannelModal({ show }) {
         )}
       </Formik>
     </Modal>
-  );
+  )
 }

@@ -35,13 +35,13 @@ export default function Home() {
   useEffect(() => {
     const socket = createSocket()
     bindSocketEvents(socket, dispatch)
-    return () => { 
+    return () => {
       socket.close()
     }
   }, [dispatch])
 
   const channelMessages = useMemo(
-    () => messages.filter((m) => String(m.channelId) === String(activeChannelId)),
+    () => messages.filter(m => String(m.channelId) === String(activeChannelId)),
     [messages, activeChannelId]
   )
 
@@ -59,7 +59,7 @@ export default function Home() {
     )
       .unwrap()
       .then(() => setDraft(''))
-      .catch(() => {}); 
+      .catch(() => {})
   }
 
   return (
@@ -71,9 +71,10 @@ export default function Home() {
             <div className="bg-light mb-4 p-3 shadow-sm small">
               <p className="m-0">
                 <b>
-                  #{' '}
+                  #
+                  {' '}
                   {channels.find(
-                    (c) => String(c.id) === String(activeChannelId)
+                    c => String(c.id) === String(activeChannelId)
                   )?.name ?? '—'}
                 </b>
               </p>
@@ -87,9 +88,11 @@ export default function Home() {
               id="messages-box"
               className="chat-messages overflow-auto px-5"
             >
-              {channelMessages.map((m) => (
+              {channelMessages.map(m => (
                 <div className="text-break mb-2" key={m.id}>
-                  <b>{m.username}</b>: {m.body}
+                  <b>{m.username}</b>
+                  : 
+                  {m.body}
                 </div>
               ))}
             </div>

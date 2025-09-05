@@ -23,7 +23,7 @@ export default function Login() {
                   src="https://frontend-chat-ru.hexlet.app/assets/avatar-DIE1AEpS.jpg"
                   className="rounded-circle"
                   alt="Войти"
-                ></img>
+                />
               </div>
               <Formik
                 initialValues={{ username: '', password: '' }}
@@ -32,13 +32,15 @@ export default function Login() {
                   try {
                     const { data } = await api.post('/api/v1/login', values)
                     dispatch(
-                      login({ token: data.token, username: data.username })
-                    );
+                      login({ token: data.token, username: data.username, })
+                    )
                     navigate(from, { replace: true })
-                  } catch (error) {
+                  }
+                  catch (error) {
                     console.log(error)
                     setStatus(t('login.invalid'))
-                  } finally {
+                  }
+                  finally {
                     setSubmitting(false)
                   }
                 }}
@@ -59,7 +61,7 @@ export default function Login() {
                         type="text"
                         required
                         placeholder={t('login.username')}
-                        className={`form-control ${status && "is-invalid"}`}
+                        className={`form-control ${status && 'is-invalid'}`}
                       />
                       <label htmlFor="username">{t('login.username')}</label>
                     </div>
@@ -71,7 +73,7 @@ export default function Login() {
                         type="password"
                         required
                         placeholder={t('login.password')}
-                        className={`form-control ${status && "is-invalid"}`}
+                        className={`form-control ${status && 'is-invalid'}`}
                       />
                       <label className="form-label" htmlFor="password">
                         {t('login.password')}
@@ -96,8 +98,8 @@ export default function Login() {
             </div>
             <div className="card-footer p-4">
               <div className="text-center">
-                <span>{t('login.noAccaunt')}</span>{' '}
-                <Link to="/signup">{t('login.register')}</Link>
+                <span>{t('login.noAccaunt')}</span>
+                {' '}<Link to="/signup">{t('login.register')}</Link>
               </div>
             </div>
           </div>

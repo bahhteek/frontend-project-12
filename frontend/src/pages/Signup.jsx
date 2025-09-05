@@ -50,20 +50,23 @@ export default function Signup() {
                     const res = await api.post('/api/v1/signup', {
                       username: values.username,
                       password: values.password,
-                    });
+                    })
                     dispatch(login(res.data))
                     navigate('/')
-                  } catch (error) {
+                  }
+                  catch (error) {
                     if (error?.response?.status === 409) {
                       setErrors({
                         username: ' ',
                         password: ' ',
                         confirmPassword: t('signup.errors.userExists'),
                       })
-                    } else {
+                    }
+                    else {
                       setErrors({ username: t('signup.errors.generic') })
                     }
-                  } finally {
+                  }
+                  finally {
                     setSubmitting(false)
                   }
                 }}
@@ -84,8 +87,8 @@ export default function Signup() {
                         required
                         className={`form-control ${
                           touched.username && errors.username
-                            ? "is-invalid"
-                            : ""
+                            ? 'is-invalid'
+                            : ''
                         }`}
                         autoComplete="username"
                       />
@@ -104,8 +107,8 @@ export default function Signup() {
                         placeholder={t('signup.password')}
                         className={`form-control ${
                           touched.password && errors.password
-                            ? "is-invalid"
-                            : ""
+                            ? 'is-invalid'
+                            : ''
                         }`}
                         autoComplete="new-password"
                       />
@@ -123,8 +126,8 @@ export default function Signup() {
                         placeholder={t('signup.confirmPassword')}
                         className={`form-control ${
                           touched.confirmPassword && errors.confirmPassword
-                            ? "is-invalid"
-                            : ""
+                            ? 'is-invalid'
+                            : ''
                         }`}
                         autoComplete="new-password"
                       />

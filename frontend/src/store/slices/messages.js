@@ -17,11 +17,12 @@ export const sendMessage = createAsyncThunk(
         username,
       })
       return data
-    } catch (error) {
+    }
+    catch (error) {
       console.log(error)
       return rejectWithValue('Ошибка отправки')
     }
-  }
+  },
 )
 
 const messagesSlice = createSlice({

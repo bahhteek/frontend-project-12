@@ -9,7 +9,7 @@ import Signup from './pages/Signup.jsx'
 import { logout } from './store/slices/auth.js'
 
 export default function App() {
-  const user = useSelector((s) => s.auth.user)
+  const user = useSelector(s => s.auth.user)
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
@@ -35,9 +35,9 @@ export default function App() {
         <Route
           path="/"
           element={
-            <RequireAuth>
+            (<RequireAuth>
               <Home />
-            </RequireAuth>
+            </RequireAuth>)
           }
         />
         <Route path="/login" element={<Login />} />

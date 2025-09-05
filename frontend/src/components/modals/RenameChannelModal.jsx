@@ -12,9 +12,9 @@ export default function RenameChannelModal({ show, channel }) {
   const { t } = useTranslation()
   const channels = useSelector(s => s.channels.list)
   const inputRef = useRef(null)
-  useEffect(() => { 
-    if (show) setTimeout(() => { 
-      inputRef.current?.select();
+  useEffect(() => {
+    if (show) setTimeout(() => {
+      inputRef.current?.select()
     }, 0)
   }, [show])
 
@@ -31,23 +31,25 @@ export default function RenameChannelModal({ show, channel }) {
   return (
     <Modal show={show} onHide={() => dispatch(closeModal())} centered>
       <Modal.Header closeButton>
-        <Modal.Title>{t("renameChannelModal.renemaChannel")}</Modal.Title>
+        <Modal.Title>{t('renameChannelModal.renemaChannel')}</Modal.Title>
       </Modal.Header>
       <Formik
         enableReinitialize
-        initialValues={{ name: channel?.name ?? "" }}
+        initialValues={{ name: channel?.name ?? '' }}
         validationSchema={Schema}
         onSubmit={async ({ name }, { setSubmitting, setStatus }) => {
           try {
             await dispatch(
-              renameChannel({ id: channel.id, name: name.trim() })
-            ).unwrap();
-            dispatch(closeModal());
-          } catch (error) {
+              renameChannel({ id: channel.id, name: name.trim(), })
+            ).unwrap()
+            dispatch(closeModal())
+          }
+          catch (error) {
             console.log(error);
-            setStatus(t("renameChannelModal.error"));
-          } finally {
-            setSubmitting(false);
+            setStatus(t("renameChannelModal.error"))
+          }
+          finally {
+            setSubmitting(false)
           }
         }}
       >
@@ -60,11 +62,11 @@ export default function RenameChannelModal({ show, channel }) {
                   id="name"
                   name="name"
                   className={`form-control mb-2 ${
-                    touched.name && errors.name ? "is-invalid" : ""
+                    touched.name && errors.name ? 'is-invalid' : ''
                   }`}
                 />
                 <label className="visually-hidden" htmlFor="name">
-                  {t("renameChannelModal.name")}
+                  {t('renameChannelModal.name')}
                 </label>
                 {touched.name && errors.name && (
                   <div className="invalid-feedback">{errors.name}</div>
@@ -76,14 +78,14 @@ export default function RenameChannelModal({ show, channel }) {
                     onClick={() => dispatch(closeModal())}
                     className="me-2 btn btn-secondary"
                   >
-                    {t("renameChannelModal.cancel")}
+                    {t('renameChannelModal.cancel')}
                   </Button>
                   <Button
                     type="submit"
                     disabled={isSubmitting}
                     className="btn btn-primary"
                   >
-                    {t("renameChannelModal.send")}
+                    {t('renameChannelModal.send')}
                   </Button>
                 </div>
               </Form.Group>

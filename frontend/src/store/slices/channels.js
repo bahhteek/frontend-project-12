@@ -6,20 +6,20 @@ import filter from '../../profanity'
 
 export const fetchChannels = createAsyncThunk(
   'channels/fetch',
-  async () => (await api.get('/api/v1/channels')).data
+  async () => (await api.get('/api/v1/channels')).data,
 )
 
 export const addChannel = createAsyncThunk(
   'channels/add',
-  async (name) =>
-    (await api.post('/api/v1/channels', { name: filter.clean(name) })).data
+  async name =>
+    (await api.post('/api/v1/channels', { name: filter.clean(name) })).data,
 )
 
 export const renameChannel = createAsyncThunk(
   'channels/rename',
   async ({ id, name }) =>
     (await api.patch(`/api/v1/channels/${id}`, { name: filter.clean(name) }))
-      .data
+      .data,
 )
 
 export const removeChannel = createAsyncThunk(
@@ -28,12 +28,12 @@ export const removeChannel = createAsyncThunk(
     await api.delete(`/api/v1/channels/${id}`)
     const state = getState()
     const channels = state.channels.list.filter(
-      (c) => String(c.id) !== String(id)
+      c => String(c.id) !== String(id),
     )
     const general =
-      channels.find((c) => c.name?.toLowerCase() === 'general') || channels[0]
+      channels.find(c => c.name?.toLowerCase() === 'general') || channels[0]
     return { id, nextId: general?.id ?? null }
-  }
+  },
 )
 
 const initial = { list: [], status: 'idle', error: null }
@@ -68,7 +68,7 @@ const slice = createSlice({
       })
 
       .addCase(renameChannel.fulfilled, (st, { payload }) => {
-        const i = st.list.findIndex((c) => String(c.id) === String(payload.id))
+        const i = st.list.findIndex(c => String(c.id) === String(payload.id))
         if (i > -1) st.list[i] = payload
         toast.success(i18n.t('toasts.channelRenamed'))
       })
@@ -78,7 +78,7 @@ const slice = createSlice({
       })
 
       .addCase(removeChannel.fulfilled, (st, { payload }) => {
-        st.list = st.list.filter((c) => String(c.id) !== String(payload.id))
+        st.list = st.list.filter(c => String(c.id) !== String(payload.id))
         toast.success(i18n.t('toasts.channelRemoved'))
       })
       .addCase(removeChannel.rejected, (st, { error }) => {

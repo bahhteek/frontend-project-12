@@ -13,7 +13,7 @@ export default function RemoveChannelModal({ show, channel }) {
     try {
       await dispatch(removeChannel(channel.id)).unwrap()
       dispatch(closeModal())
-    } 
+    }
     catch (error) {
       console.log(error)
     }
@@ -29,13 +29,13 @@ export default function RemoveChannelModal({ show, channel }) {
           <p className="lead">{t('removeChannelModal.agreeDelete')}</p>
           <div className="d-flex justify-content-end">
             <Button
-              variant='secondary'
+              variant="secondary"
               onClick={() => dispatch(closeModal())}
               className="me-2 btn btn-secondary"
             >
               {t('removeChannelModal.cancel')}
             </Button>
-            <Button type='submit' variant='danger' className="btn btn-danger">
+            <Button type="submit" variant="danger" className="btn btn-danger">
               {t('removeChannelModal.delete')}
             </Button>
           </div>

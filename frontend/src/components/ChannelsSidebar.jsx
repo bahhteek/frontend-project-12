@@ -7,7 +7,7 @@ export default function ChannelsSidebar() {
   const dispatch = useDispatch()
   const { list } = useSelector(s => s.channels)
   const activeId = useSelector(s => s.ui.activeChannelId)
-  const {t} = useTranslation()
+  const { t } = useTranslation()
 
   return (
     <div className="col-4 col-md-2 border-end px-0 bg-light flex-column h-100 d-flex">
@@ -36,9 +36,9 @@ export default function ChannelsSidebar() {
         className="nav flex-column nav-pills nav-fill px-2 mb-3 overflow-auto h-100 d-block"
       >
         {list.map((c) => {
-          const isActive = String(c.id) === String(activeId);
+          const isActive = String(c.id) === String(activeId)
           const baseBtnClass = `w-100 rounded-0 text-start text-truncate btn ${
-            isActive ? "btn-secondary" : ""
+            isActive ? 'btn-secondary' : ''
           }`
 
           if (!c.removable) {
@@ -63,7 +63,7 @@ export default function ChannelsSidebar() {
                 <Button
                   type="button"
                   className={baseBtnClass}
-                  variant={isActive ? "secondary" : "light"}
+                  variant={isActive ? 'secondary' : 'light'}
                   onClick={() => dispatch(setActiveChannel(c.id))}
                   title={`# ${c.name}`}
                 >
@@ -74,7 +74,7 @@ export default function ChannelsSidebar() {
                 <Dropdown.Toggle
                   split
                   className="flex-grow-0"
-                  variant={isActive ? "secondary" : "light"}
+                  variant={isActive ? 'secondary' : 'light'}
                 >
                   <span className="visually-hidden">
                     {t('sidebar.channelManagement')}
@@ -83,17 +83,13 @@ export default function ChannelsSidebar() {
 
                 <Dropdown.Menu>
                   <Dropdown.Item
-                    onClick={() =>
-                      dispatch(openModal({ type: 'rename', payload: c }))
-                    }
+                    onClick={() => dispatch(openModal({ type: 'rename', payload: c }))}
                   >
                     {t('sidebar.rename')}
                   </Dropdown.Item>
                   <Dropdown.Item
                     disabled={!c.removable}
-                    onClick={() =>
-                      dispatch(openModal({ type: 'remove', payload: c }))
-                    }
+                    onClick={() => dispatch(openModal({ type: 'remove', payload: c }))}
                   >
                     {t('sidebar.delete')}
                   </Dropdown.Item>
