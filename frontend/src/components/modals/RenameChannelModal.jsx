@@ -40,13 +40,13 @@ export default function RenameChannelModal({ show, channel }) {
         onSubmit={async ({ name }, { setSubmitting, setStatus }) => {
           try {
             await dispatch(
-              renameChannel({ id: channel.id, name: name.trim(), })
+              renameChannel({ id: channel.id, name: name.trim() }),
             ).unwrap()
             dispatch(closeModal())
           }
           catch (error) {
-            console.log(error);
-            setStatus(t("renameChannelModal.error"))
+            console.log(error)
+            setStatus(t('renameChannelModal.error'))
           }
           finally {
             setSubmitting(false)
@@ -94,5 +94,5 @@ export default function RenameChannelModal({ show, channel }) {
         )}
       </Formik>
     </Modal>
-  );
+  )
 }

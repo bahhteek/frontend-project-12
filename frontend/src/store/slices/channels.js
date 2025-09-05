@@ -30,8 +30,7 @@ export const removeChannel = createAsyncThunk(
     const channels = state.channels.list.filter(
       c => String(c.id) !== String(id),
     )
-    const general =
-      channels.find(c => c.name?.toLowerCase() === 'general') || channels[0]
+    const general = channels.find(c => c.name?.toLowerCase() === 'general') || channels[0]
     return { id, nextId: general?.id ?? null }
   },
 )

@@ -32,7 +32,7 @@ export default function Login() {
                   try {
                     const { data } = await api.post('/api/v1/login', values)
                     dispatch(
-                      login({ token: data.token, username: data.username, })
+                      login({ token: data.token, username: data.username }),
                     )
                     navigate(from, { replace: true })
                   }
@@ -98,8 +98,7 @@ export default function Login() {
             </div>
             <div className="card-footer p-4">
               <div className="text-center">
-                <span>{t('login.noAccaunt')}</span>
-                {' '}<Link to="/signup">{t('login.register')}</Link>
+                <span>{t('login.noAccaunt')}</span> <Link to="/signup">{t('login.register')}</Link>
               </div>
             </div>
           </div>

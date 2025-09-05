@@ -21,10 +21,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <>
               <App />
               <ToastContainer position="top-right" autoClose={3000} />
-            </>
+            </>,
           )}
         </BrowserRouter>
       </Provider>
     </I18nextProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 )

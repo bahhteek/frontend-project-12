@@ -46,7 +46,7 @@ export default function AddChannelModal({ show }) {
           }
           catch (error) {
             console.log(error)
-            setStatus(t("addChannelModal.creatingError"))
+            setStatus(t('addChannelModal.creatingError'))
           }
           finally {
             setSubmitting(false)
