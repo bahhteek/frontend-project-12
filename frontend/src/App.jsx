@@ -37,7 +37,7 @@ export default function App() {
           element={
             (
             <RequireAuth>
-              <Home />
+                <Home />
             </RequireAuth>
             )
           }

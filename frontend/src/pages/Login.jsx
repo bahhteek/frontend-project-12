@@ -98,7 +98,9 @@ export default function Login() {
             </div>
             <div className="card-footer p-4">
               <div className="text-center">
-                <span>{t('login.noAccaunt')}</span> <Link to="/signup">{t('login.register')}</Link>
+                <span>{t('login.noAccaunt')}</span>
+                {` `}
+                <Link to="/signup">{t('login.register')}</Link>
               </div>
             </div>
           </div>

@@ -12,7 +12,9 @@ export default function NotFound() {
       />
       <h1 className="h4 text-muted">{t('notFound.pageNotFound')}</h1>
       <p className="text-muted">
-        {t('notFound.youCan')} <Link to="/">{t('notFound.onMainPage')}</Link>
+        {t('notFound.youCan')}
+        {` `}
+        <Link to="/">{t('notFound.onMainPage')}</Link>
       </p>
     </div>
   )
