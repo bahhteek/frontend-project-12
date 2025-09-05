@@ -71,7 +71,9 @@ export default function Home() {
             <div className="bg-light mb-4 p-3 shadow-sm small">
               <p className="m-0">
                 <b>
-                  # {channels.find(
+                  #
+                  {` `}
+                  {channels.find(
                     c => String(c.id) === String(activeChannelId),
                   )?.name ?? '—'}
                 </b>
@@ -85,7 +87,10 @@ export default function Home() {
             <div id="messages-box" className="chat-messages overflow-auto px-5">
               {channelMessages.map(m => (
                 <div className="text-break mb-2" key={m.id}>
-                  <b>{m.username}</b>: {m.body}
+                  <b>{m.username}</b>
+                  :
+                  {` `}
+                  {m.body}
                 </div>
               ))}
             </div>
@@ -136,5 +141,5 @@ export default function Home() {
         channel={modal?.payload}
       />
     </div>
-  );
+  )
 }
