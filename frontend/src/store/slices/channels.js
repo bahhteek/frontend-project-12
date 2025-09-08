@@ -1,31 +1,32 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { toast } from 'react-toastify'
 import api from '../../api'
+import routes from '../../apiPaths'
 import i18n from '../../i18n'
 import filter from '../../profanity'
 
 export const fetchChannels = createAsyncThunk(
-  'channels/fetch',
-  async () => (await api.get('/api/v1/channels')).data,
-)
+  "channels/fetch",
+  async () => (await api.get(routes.channels)).data
+);
 
 export const addChannel = createAsyncThunk(
-  'channels/add',
-  async name =>
-    (await api.post('/api/v1/channels', { name: filter.clean(name) })).data,
-)
+  "channels/add",
+  async (name) =>
+    (await api.post(routes.channels, { name: filter.clean(name) })).data
+);
 
 export const renameChannel = createAsyncThunk(
-  'channels/rename',
+  "channels/rename",
   async ({ id, name }) =>
-    (await api.patch(`/api/v1/channels/${id}`, { name: filter.clean(name) }))
-      .data,
-)
+    (await api.patch(`${routes.channels}/${id}`, { name: filter.clean(name) }))
+      .data
+);
 
 export const removeChannel = createAsyncThunk(
   'channels/remove',
   async (id, { getState }) => {
-    await api.delete(`/api/v1/channels/${id}`)
+    await api.delete(`${routes.channels}/${id}`);
     const state = getState()
     const channels = state.channels.list.filter(
       c => String(c.id) !== String(id),
