@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import * as Yup from 'yup'
 import api from '../api'
-import { routes } from '../apiPaths'
 import { login } from '../store/slices/auth'
 
 export default function Signup() {
@@ -48,7 +47,7 @@ export default function Signup() {
                 validationSchema={SignupSchema}
                 onSubmit={async (values, { setSubmitting, setErrors }) => {
                   try {
-                    const res = await api.post(routes.signup, {
+                    const res = await api.post('/api/v1/signup', {
                       username: values.username,
                       password: values.password,
                     })
