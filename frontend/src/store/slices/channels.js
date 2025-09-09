@@ -11,22 +11,21 @@ export const fetchChannels = createAsyncThunk(
 )
 
 export const addChannel = createAsyncThunk(
-  "channels/add",
-  async (name) =>
-    (await api.post(routes.channels, { name: filter.clean(name) })).data
-);
+  'channels/add',
+  async name => (await api.post(routes.channels, { name: filter.clean(name), } )).data
+)
 
 export const renameChannel = createAsyncThunk(
-  "channels/rename",
+  'channels/rename',
   async ({ id, name }) =>
-    (await api.patch(`${routes.channels}/${id}`, { name: filter.clean(name) }))
+    (await api.patch(`${routes.channels}/${id}`, { name: filter.clean(name), }))
       .data
-);
+)
 
 export const removeChannel = createAsyncThunk(
   'channels/remove',
   async (id, { getState }) => {
-    await api.delete(`${routes.channels}/${id}`);
+    await api.delete(`${routes.channels}/${id}`)
     const state = getState()
     const channels = state.channels.list.filter(
       c => String(c.id) !== String(id),

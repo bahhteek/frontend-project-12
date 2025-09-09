@@ -16,7 +16,7 @@ export const sendMessage = createAsyncThunk(
         body: filter.clean(text),
         channelId: String(channelId),
         username,
-      });
+      })
       return data
     }
     catch (error) {
