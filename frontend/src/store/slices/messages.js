@@ -1,10 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import api from '../../api'
-import routes from '../../apiPaths'
 import filter from '../../profanity'
 
 export const fetchMessages = createAsyncThunk('messages/fetch', async () => {
-  const { data } = await api.get(routes.messages);
+  const { data } = await api.get('/api/v1/messages')
   return data
 })
 
@@ -12,11 +11,11 @@ export const sendMessage = createAsyncThunk(
   'messages/send',
   async ({ text, channelId, username }, { rejectWithValue }) => {
     try {
-      const { data } = await api.post(routes.messages, {
+      const { data } = await api.post('/api/v1/messages', {
         body: filter.clean(text),
         channelId: String(channelId),
         username,
-      });
+      })
       return data
     }
     catch (error) {
