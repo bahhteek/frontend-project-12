@@ -47,6 +47,7 @@ export default function ChannelsSidebar() {
                 <button
                   type="button"
                   className={baseBtnClass}
+                  aria-label={c.name}
                   onClick={() => dispatch(setActiveChannel(c.id))}
                   title={`# ${c.name}`}
                 >
@@ -54,7 +55,7 @@ export default function ChannelsSidebar() {
                   {c.name}
                 </button>
               </li>
-            )
+            );
           }
 
           return (
@@ -65,6 +66,7 @@ export default function ChannelsSidebar() {
                   className={baseBtnClass}
                   variant={isActive ? 'secondary' : 'light'}
                   onClick={() => dispatch(setActiveChannel(c.id))}
+                  aria-label={c.name}
                   title={`# ${c.name}`}
                 >
                   <span className="me-1">#</span>
