@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import api from '../api'
+import { routes } from '../apiPaths'
 import { login } from '../store/slices/auth'
 
 export default function Login() {
@@ -30,7 +31,7 @@ export default function Login() {
                 onSubmit={async (values, { setSubmitting, setStatus }) => {
                   setStatus(null)
                   try {
-                    const { data } = await api.post('/api/v1/login', values)
+                    const { data } = await api.post(routes.login, values)
                     dispatch(
                       login({ token: data.token, username: data.username }),
                     )
