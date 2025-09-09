@@ -12,14 +12,14 @@ export const fetchChannels = createAsyncThunk(
 
 export const addChannel = createAsyncThunk(
   'channels/add',
-  async (name) =>
-    (await api.post(routes.channels, { name: filter.clean(name) })).data
+  async name =>
+    (await api.post(routes.channels, { name: filter.clean(name) })).data,
 )
 
 export const renameChannel = createAsyncThunk(
   'channels/rename',
   async ({ id, name }) =>
-    (await api.patch(`${routes.channels}/${id}`, { name: filter.clean(name) })).data
+    (await api.patch(`${routes.channels}/${id}`, { name: filter.clean(name) })).data,
 )
 
 export const removeChannel = createAsyncThunk(
