@@ -6,4 +6,4 @@
 - `make start` — запуск сервера (`@hexlet/chat-server`) и статики `./frontend/dist`
 
 ## Deployed App
-https://<...>.onrender.com
+https://frontend-project-12-juzx.onrender.com
