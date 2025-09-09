@@ -1,4 +1,4 @@
-const apiBase = import.meta.env.VITE_API
+const apiBase = "/api/v1";
 
 export const routes = {
   channels: `${import.meta.env.VITE_ROLLBAR_ACCESS_TOKEN}/channels`,
