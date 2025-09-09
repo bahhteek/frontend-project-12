@@ -5,10 +5,10 @@ import routes from '../../apiPaths'
 import i18n from '../../i18n'
 import filter from '../../profanity'
 
-export const fetchChannels = createAsyncThunk(
-  "channels/fetch",
-  async () => (await api.get(routes.channels)).data
-);
+export const fetchChannels = createAsyncThunk('channels/fetch', async () => {
+  const { data } = await api.get(routes.channels)
+  return Array.isArray(data) ? data : data.channels ?? []
+});
 
 export const addChannel = createAsyncThunk(
   "channels/add",
